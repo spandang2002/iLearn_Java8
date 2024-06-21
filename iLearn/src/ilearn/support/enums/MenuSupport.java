@@ -17,6 +17,22 @@ public enum MenuSupport {
     OPTION11(11, "11. Constructor reference"),
     OPTION12(12, "12. Lambda Scopes"),
     OPTION13(13, "13. Accessing fields and static variables within lambda expressions"),
+    OPTION14(14, "14. Predicate->test(Built-in Functional Interfaces)"),
+    OPTION15(15, "15. Functions->apply(Built-in Functional Interfaces)"),
+    OPTION16(16, "16. Suppliers(Built-in Functional Interfaces)"),
+    OPTION17(17, "17. Consumers(Built-in Functional Interfaces)"),
+    OPTION18(18, "18. Comparators(Built-in Functional Interfaces)"),
+    OPTION19(19, "19. Optionals(nifty utilities to prevent NullPointerException)"),
+    OPTION20(20, "20. Filter(Streams)"),
+    OPTION21(21, "21. Sorted(Streams)"),
+    OPTION22(22, "22. Map(Streams)"),
+    OPTION23(23, "23. Match(Streams)"),
+    OPTION24(24, "24. Count(Streams)"),
+    OPTION25(25, "25. Reduce(Streams)"),
+    OPTION26(26, "26. ParallelStreams(Sequential and Parallel Sort)"),
+    OPTION27(27, "27. Maps(Streams)"),
+    OPTION28(28, "28. DateAPI"),
+
     EXIT(100, "100. Exit");
 
     private final int key;

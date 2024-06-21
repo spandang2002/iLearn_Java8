@@ -7,6 +7,8 @@ import ilearn.support.enums.MenuSupport;
 import ilearn.support.interfaces.*;
 
 import java.util.*;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 public class Main {
 
@@ -53,12 +55,140 @@ public class Main {
             case OPTION13:
                 accessingFieldsAndStaticVariablesWithinLambdaExpressions();
                 break;
+            case OPTION14:
+                predicateTest_builtInFunctionalInterfaces();
+                break;
+            case OPTION15:
+                functionApply_builtInFunctionalInterfaces();
+                break;
+            case OPTION16:
+                suppliers_builtInFunctionalInterfaces();
+                break;
+            case OPTION17:
+                consumers_builtInFunctionalInterfaces();
+                break;
+            case OPTION18:
+                comparators_builtInFunctionalInterfaces();
+                break;
+            case OPTION19:
+                optionals_niftyUtilitiesToPreventNullPointerException();
+                break;
+            case OPTION20:
+                filterStreams();
+                break;
+            case OPTION21:
+                sortedStreams();
+                break;
+            case OPTION22:
+                mapStreams();
+                break;
+            case OPTION23:
+                matchStreams();
+                break;
+            case OPTION24:
+                countStreams();
+                break;
+            case OPTION25:
+                reduceStreams();
+                break;
+            case OPTION26:
+                parallelStreams();
+                break;
+            case OPTION27:
+                mapsStreams();
+                break;
+            case OPTION28:
+                dateAPI();
+                break;
             case EXIT:
             default:
                 System.out.println("Exiting...");
                 System.exit(2002);
                 break;
         }
+    }
+
+    private static void dateAPI() {
+    }
+
+    private static void mapsStreams() {
+    }
+
+    private static void parallelStreams() {
+    }
+
+    private static void reduceStreams() {
+    }
+
+    private static void countStreams() {
+    }
+
+    private static void matchStreams() {
+    }
+
+    private static void mapStreams() {
+    }
+
+    private static void sortedStreams() {
+    }
+
+    private static void filterStreams() {
+    }
+
+    private static void optionals_niftyUtilitiesToPreventNullPointerException() {
+    }
+
+    private static void comparators_builtInFunctionalInterfaces() {
+    }
+
+    private static void consumers_builtInFunctionalInterfaces() {
+    }
+
+    private static void suppliers_builtInFunctionalInterfaces() {
+    }
+
+    /**
+     * Functions accept one argument and produce a result.
+     * Default methods can be used to chain multiple functions together (compose, andThen).
+     */
+    private static void functionApply_builtInFunctionalInterfaces() {
+
+        Function<String, Integer> toInteger = Integer::valueOf;
+        Function<String, String> backToString = toInteger.andThen(String::valueOf);
+
+        String apply = backToString.apply("123");// "123"
+        System.out.println(apply);
+
+    }
+
+    /**
+     * Predicates are boolean-valued functions of one argument.
+     * The interface contains various default methods for composing predicates to complex logical terms (and, or, negate)
+     */
+    private static void predicateTest_builtInFunctionalInterfaces() {
+
+        Predicate<String> predicate1 = (s) -> s.length() > 0;
+
+        System.out.println(predicate1.test("foo"));              // true
+        System.out.println(predicate1.negate().test("foo"));     // false
+
+
+        Predicate<String> predicate2 = (s) -> s.length() < 3;
+        System.out.println(predicate2.test("fooo"));              // false
+        System.out.println(predicate2.negate().test("fooo"));     // true
+
+        // TODO: need to learn.
+//        Predicate<Boolean> nonNull = Objects::nonNull;
+//        System.out.println(nonNull);
+//
+//        Predicate<Boolean> isNull = Objects::isNull;
+//        System.out.println(isNull);
+//
+//        Predicate<String> isEmpty = String::isEmpty;
+//        System.out.println(isEmpty);
+//
+//        Predicate<String> isNotEmpty = isEmpty.negate();
+//        System.out.println(isNotEmpty);
     }
 
     /**
@@ -321,6 +451,7 @@ public class Main {
     }
 
     /**
+     * Default methods cannot be accessed from within lambda expressions.
      * Demonstrates the difference between the anonymous class and the lambda expression.
      * Inside the lambda expression you can't call default methods of an interface.
      * But the default method of the interface can be called using the variable of the interface where the lambda expression is assigned.
@@ -330,6 +461,7 @@ public class Main {
             System.out.println(Math.sqrt(100));
             System.out.println(Math.sqrt(a));
             // Here the default method of interface can't be called.
+            // Default methods cannot be accessed from within lambda expressions.
             return Math.sqrt(a * 100);
         };
 
