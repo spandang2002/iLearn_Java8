@@ -1,5 +1,6 @@
 package ilearn.main;
 
+import ilearn.support.classes.AccessingFieldsAndStaticVariablesWithinLambdaExpressions;
 import ilearn.support.classes.Person;
 import ilearn.support.classes.Something;
 import ilearn.support.enums.MenuSupport;
@@ -46,6 +47,12 @@ public class Main {
             case OPTION11:
                 constructorReference();
                 break;
+            case OPTION12:
+                lambdaScopes();
+                break;
+            case OPTION13:
+                accessingFieldsAndStaticVariablesWithinLambdaExpressions();
+                break;
             case EXIT:
             default:
                 System.out.println("Exiting...");
@@ -55,9 +62,69 @@ public class Main {
     }
 
     /**
+     * Demonstrates the use of the lambda scopes
+     * Reading add writing instance and static variables within lambda expressions.
+     * The lambda expression can access the instance and static variables.
+     * The lambda expression can read and write the instance and static variables.
+     */
+    private static void accessingFieldsAndStaticVariablesWithinLambdaExpressions() {
+        // Accessing fields and static variables within lambda expressions
+        AccessingFieldsAndStaticVariablesWithinLambdaExpressions accessingFieldsAndStaticVariablesWithinLambdaExpressions = new AccessingFieldsAndStaticVariablesWithinLambdaExpressions();
+        accessingFieldsAndStaticVariablesWithinLambdaExpressions.accessingFieldsAndStaticVariablesWithinLambdaExpressions_();
+    }
+
+    private static void lambdaScopes() {
+        withFinalVariable();
+        withoutFinalVariable();
+        // Variable used in lambda expression should be final or effectively final so getting compilation error at below code.
+        mustBeImplicitlyFinalForCodeToCompile();
+
+
+    }
+
+    /**
+     * Demonstrates the use of the lambda scopes
+     * Variable used in lambda expression should be final or effectively final
+     */
+    private static void mustBeImplicitlyFinalForCodeToCompile() {
+        int num = 1;
+        // Variable used in lambda expression should be final or effectively final so getting compilation error at below code.
+//        Converter<Integer, String> stringConverter =
+//                (from) -> String.valueOf(from + num);
+        num = 3;
+    }
+
+    /**
+     * Demonstrates the use of the lambda scopes
+     * num must be implicitly final for the code to compile.
+     * The lambda expression can access the implicitly final variable.
+     */
+    private static void withoutFinalVariable() {
+        // num must be implicitly final for the code to compile.
+        int num = 1;
+        Converter<Integer, String> stringConverter =
+                (from) -> String.valueOf(from + num);
+
+        String convert = stringConverter.convert(2);
+        System.out.println(convert);
+    }
+
+    /**
+     * Demonstrates the use of the lambda scopes
+     * The lambda expression can access the final variable.
+     */
+    private static void withFinalVariable() {
+        final int num = 1;
+        Converter<Integer, String> stringConverter =
+                (from) -> String.valueOf(from + num);
+
+        String convert = stringConverter.convert(2);// 3
+        System.out.println(convert);
+    }
+
+    /**
      * Demonstrates the use of the method reference for constructor.
      * The method reference is used to refer to the constructor of the class.
-     *
      */
     private static void constructorReference() {
         PersonFactory<Person> personFactory = Person::new;
@@ -83,7 +150,6 @@ public class Main {
     /**
      * Demonstrates the use of the method reference for instance methods.
      * The method reference is used to refer to the instance method of the class.
-     *
      */
     private static void instanceMethodReferences() {
         Something something = new Something();
@@ -131,7 +197,6 @@ public class Main {
     /**
      * Demonstrates the use of the method reference for static methods.
      * The method reference is used to refer to the static method of the class.
-     *
      */
     private static void staticMethodReferences() {
         Converter<String, Integer> converter = Integer::valueOf;
@@ -143,7 +208,6 @@ public class Main {
      * Demonstrates the use of the functional interface with a lambda expression.
      * The lambda expression is used to provide the implementation of the abstract method of the interface.
      * The lambda expression is used to provide the implementation of the abstract method of the functional interface.
-     *
      */
     private static void demonstrateFunctionalInterfaceWithLambdaExpression() {
         Converter<String, Integer> converter = (from) -> Integer.valueOf(from);
@@ -157,7 +221,6 @@ public class Main {
      * The only difference is that the instance method reference is used here.
      * The instance method of String class[public int compareTo(String anotherString)]
      * Reference is used to refer the instance method of an object.
-     *
      */
     private static void listSortUsingLambdaInJava8_4th() {
         List<String> names = Arrays.asList("peter", "anna", "mike", "xenia");
@@ -173,7 +236,6 @@ public class Main {
      * The only difference is that the data types are not specified here.
      * The lambda expression does not need to specify the data type of the parameters.
      * The compiler can infer the same from the value of the parameters.
-     *
      */
     private static void listSortUsingLambdaInJava8_3rd() {
         List<String> names = Arrays.asList("peter", "anna", "mike", "xenia");
@@ -188,7 +250,6 @@ public class Main {
      * This code is equivalent to the code in listSortUsingLambdaInJava8() method.
      * The only difference is that the lambda expression is used in one line.
      * The lambda expression is used to provide the implementation in one line also of the abstract method of the interface.
-     *
      */
     private static void listSortUsingLambdaInJava8_2nd() {
         List<String> names = Arrays.asList("peter", "anna", "mike", "xenia");
@@ -203,7 +264,6 @@ public class Main {
      * This code is equivalent to the code in listSortInJava7() method.
      * The only difference is that the lambda expression is used here.
      * The lambda expression is used to provide the implementation of the abstract method of the interface.
-     *
      */
     private static void listSortUsingLambdaInJava8() {
 
@@ -221,7 +281,6 @@ public class Main {
      * This code is equivalent to the code in listSortUsingLambdaInJava8() method.
      * The only difference is that the anonymous class is used here.
      * The anonymous class is used to provide the implementation of the abstract method of the interface.
-     *
      */
     private static void listSortInJava7() {
         List<String> names = Arrays.asList("peter", "anna", "mike", "xenia");
@@ -241,7 +300,6 @@ public class Main {
      * Demonstrates the use of the anonymous class with the interface and the abstract class.
      * The anonymous class is used to provide the implementation of the abstract method of the interface.
      * The anonymous class is used to provide the implementation of the abstract method of the abstract class.
-     *
      */
     private static void annonymousClassWithInterfaceAndAbstractClass() {
         Formula formula = new Formula() {
@@ -266,8 +324,6 @@ public class Main {
      * Demonstrates the difference between the anonymous class and the lambda expression.
      * Inside the lambda expression you can't call default methods of an interface.
      * But the default method of the interface can be called using the variable of the interface where the lambda expression is assigned.
-     *
-     *
      */
     private static void annonymousClassWithInterfaceAndAbstractClass2() {
         Formula formula = (int a) -> {
@@ -310,7 +366,6 @@ public class Main {
      * The selected option is used to execute the code for the selected option.
      * The code for the selected option is executed.
      *
-     *
      * @return MenuSupport
      */
     private static MenuSupport menu() {
@@ -337,7 +392,6 @@ public class Main {
      * The menu is displayed using the values of the MenuSupport enum.
      * The user is asked to select an option from the menu.
      * The user is asked to enter the option from the menu.
-     *
      */
     private static void printMenu() {
         for (MenuSupport option : MenuSupport.values()) {

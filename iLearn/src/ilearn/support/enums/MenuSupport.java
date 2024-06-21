@@ -15,6 +15,8 @@ public enum MenuSupport {
     OPTION9(9, "9. Static method references"),
     OPTION10(10, "10. Instance method references"),
     OPTION11(11, "11. Constructor reference"),
+    OPTION12(12, "12. Lambda Scopes"),
+    OPTION13(13, "13. Accessing fields and static variables within lambda expressions"),
     EXIT(100, "100. Exit");
 
     private final int key;
